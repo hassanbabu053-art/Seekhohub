@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeekhoHub — Online Courses</title>
+<style>
+:root{--navy:#17243b;--blue:#2463eb;--orange:#ff9500;--ink:#182230;--muted:#667085;--bg:#f5f7fb;--green:#159947}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--navy);color:white;padding:16px max(5%,calc((100% - 1180px)/2));display:flex;align-items:center;gap:22px;position:sticky;top:0;z-index:5;box-shadow:0 3px 14px #0b173022}
+.brand{font-size:25px;font-weight:800;letter-spacing:-.7px;white-space:nowrap}.brand span{color:#ffb020}
+.search{flex:1;display:flex;max-width:540px}.search input{width:100%;padding:12px 15px;border:0;border-radius:10px 0 0 10px;font-size:15px;outline:none}.search button{border:0;background:var(--orange);padding:0 18px;border-radius:0 10px 10px 0;font-weight:700;cursor:pointer}
+.header-actions{margin-left:auto;display:flex;gap:10px}.header-actions button{border:1px solid #ffffff55;background:transparent;color:white;padding:10px 14px;border-radius:9px;cursor:pointer}
+main{max-width:1180px;margin:auto;padding:26px 20px 60px}
+.hero{background:linear-gradient(115deg,#1b2c49,#244e91);color:white;border-radius:22px;padding:34px 36px;display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center;overflow:hidden}
+.eyebrow{color:#ffd080;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase}.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.1;margin:12px 0}.hero p{color:#dce7fb;max-width:560px;line-height:1.6}.hero .cta{background:var(--orange);border:0;color:#241800;padding:13px 19px;border-radius:10px;font-weight:800;cursor:pointer}
+.hero-art{font-size:110px;text-align:center;filter:drop-shadow(0 14px 14px #101b3d66)}
+.stats{display:flex;gap:22px;margin-top:22px;flex-wrap:wrap;color:#e1eaff;font-size:13px}.stats b{color:white}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:34px 0 18px}.section-head h2{margin:0;font-size:27px}.section-head p{margin:5px 0 0;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.filter{border:1px solid #dce2ec;background:white;border-radius:99px;padding:9px 15px;cursor:pointer;color:#475467}.filter.active{background:var(--navy);color:white;border-color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 18px #1527440a;border:1px solid #e9edf4;display:flex;flex-direction:column;min-width:0}.thumb{height:172px;display:flex;align-items:center;justify-content:center;font-size:68px;position:relative;background:linear-gradient(135deg,#dbeafe,#e9d5ff)}.thumb.green{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}.thumb.orange{background:linear-gradient(135deg,#ffedd5,#fed7aa)}.thumb.pink{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}.thumb.dark{background:linear-gradient(135deg,#dbeafe,#c7d2fe)}
+.tag{position:absolute;top:12px;left:12px;background:#fff;color:#344054;padding:6px 9px;border-radius:7px;font-size:11px;font-weight:800}.card-body{padding:17px;display:flex;flex-direction:column;flex:1}.card h3{font-size:18px;line-height:1.35;margin:0 0 9px}.desc{font-size:13px;color:var(--muted);line-height:1.45;margin:0 0 12px}.meta{display:flex;justify-content:space-between;color:#667085;font-size:12px;margin-top:auto;padding:10px 0}.price-row{display:flex;align-items:center;gap:9px;border-top:1px solid #eef1f5;padding-top:13px}.price{font-size:23px;font-weight:800}.old{color:#98a2b3;text-decoration:line-through;font-size:13px}.off{margin-left:auto;color:var(--green);font-size:12px;font-weight:800}.buy{margin-top:13px;width:100%;border:0;background:var(--blue);color:white;padding:12px;border-radius:9px;font-weight:800;cursor:pointer}.buy:hover{background:#174bc4}
+.empty{display:none;text-align:center;padding:35px;color:var(--muted)}footer{background:#142137;color:#d7e0ef;padding:28px 20px;text-align:center}footer b{color:white}
+.modal-backdrop{display:none;position:fixed;inset:0;background:#10182899;z-index:10;align-items:center;justify-content:center;padding:18px}.modal{background:white;border-radius:18px;padding:24px;max-width:460px;width:100%;box-shadow:0 20px 60px #0003}.modal h2{margin:0 0 10px}.modal p{color:var(--muted);line-height:1.5}.modal button{cursor:pointer}.close{float:right;border:0;background:#eef2f6;border-radius:8px;padding:7px 10px}.primary{background:var(--blue);color:white;border:0;border-radius:9px;padding:12px 16px;font-weight:700}.notice{background:#fff7e6;border:1px solid #ffdf9b;padding:12px;border-radius:10px;font-size:13px;color:#7a4b00}
+@media(max-width:800px){header{flex-wrap:wrap;padding:13px 16px;gap:12px}.brand{font-size:22px}.search{order:3;flex-basis:100%;max-width:none}.header-actions{margin-left:auto}.hero{grid-template-columns:1fr;padding:27px}.hero-art{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){main{padding:17px 13px 40px}.header-actions button{padding:8px 10px}.grid{grid-template-columns:1fr}.thumb{height:185px}.section-head{align-items:start;flex-direction:column}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Seekho<span>Hub</span></div>
+  <form class="search" id="searchForm"><input id="searchInput" placeholder="Course search karein..." aria-label="Search courses"><button type="submit">Search</button></form>
+  <div class="header-actions"><button id="loginBtn">Login</button><button id="cartBtn">🛒 Cart <span id="cartCount">0</span></button></div>
+</header>
+<main>
+  <section class="hero">
+    <div><div class="eyebrow">Learn • Build • Grow</div><h1>Apni skills ko<br>next level par le jao.</h1><p>Practical online courses seekhein, apni speed se. Data Analytics, Web Development, AI tools aur creator skills — sab ek jagah.</p><button class="cta" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Explore Courses →</button>
+      <div class="stats"><span>⭐ <b>4.8/5</b> learner rating</span><span>🎓 <b>1,200+</b> learners</span><span>▶ <b>Self-paced</b> learning</span></div>
+    </div><div class="hero-art" aria-hidden="true">🎓💻</div>
+  </section>
+  <div class="section-head" id="courses"><div><h2>Popular Courses</h2><p>Apne goal ke hisaab se course choose karein.</p></div><span id="resultCount" style="color:#667085;font-size:14px"></span></div>
+  <div class="filters" id="filters">
+    <button class="filter active" data-category="All">All Courses</button><button class="filter" data-category="Data">Data Analytics</button><button class="filter" data-category="Web">Web Development</button><button class="filter" data-category="AI">AI Tools</button><button class="filter" data-category="Creator">Creator Skills</button>
+  </div>
+  <div class="grid" id="courseGrid"></div><div class="empty" id="empty">Is search mein course nahi mila. Dusra keyword try karein.</div>
+</main>
+<footer><b>SeekhoHub</b> — Aapki learning journey yahin se shuru hoti hai.<br><small>Demo website • Abhi real payment ya account system connected nahi hai.</small></footer>
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true"><button class="close" id="closeModal">✕</button><div id="modalContent"></div></div></div>
+<script>
+const courses=[
+ {id:1,title:"Data Analytics Masterclass",category:"Data",emoji:"📊",tone:"green",tag:"Bestseller",desc:"Excel, SQL, Power BI aur real-world dashboard projects.",price:499,old:1999,lessons:42,level:"Beginner"},
+ {id:2,title:"Web Development: HTML, CSS & JS",category:"Web",emoji:"💻",tone:"dark",tag:"Practical",desc:"Responsive websites banana seekhein, zero se projects tak.",price:399,old:1499,lessons:36,level:"Beginner"},
+ {id:3,title:"AI Tools se Smart Work",category:"AI",emoji:"🤖",tone:"orange",tag:"Trending",desc:"AI tools ka responsible use, prompts aur productivity workflows.",price:299,old:1299,lessons:28,level:"All levels"},
+ {id:4,title:"YouTube Creator Starter Kit",category:"Creator",emoji:"🎬",tone:"pink",tag:"Popular",desc:"Content planning, thumbnails, editing workflow aur channel basics.",price:349,old:1499,lessons:31,level:"Beginner"},
+ {id:5,title:"SQL for Data Beginners",category:"Data",emoji:"🗄️",tone:"dark",tag:"New",desc:"Queries, joins, grouping aur practice datasets ke saath SQL.",price:249,old:999,lessons:24,level:"Beginner"},
+ {id:6,title:"Python Programming Basics",category:"Data",emoji:"🐍",tone:"green",tag:"Foundation",desc:"Variables se functions tak Python fundamentals aur exercises.",price:399,old:1599,lessons:34,level:"Beginner"}
+];
+let activeCategory="All",cart=[];
+const grid=document.getElementById("courseGrid"),input=document.getElementById("searchInput");
+function render(){
+ const q=input.value.trim().toLowerCase();
+ const list=courses.filter(c=>(activeCategory==="All"||c.category===activeCategory)&&(`${c.title} ${c.desc} ${c.category}`.toLowerCase().includes(q)));
+ grid.innerHTML=list.map(c=>`<article class="card"><div class="thumb ${c.tone}"><span class="tag">${c.tag}</span>${c.emoji}</div><div class="card-body"><h3>${c.title}</h3><p class="desc">${c.desc}</p><div class="meta"><span>▶ ${c.lessons} lessons</span><span>${c.level}</span></div><div class="price-row"><span class="price">₹${c.price}</span><span class="old">₹${c.old}</span><span class="off">${Math.round((1-c.price/c.old)*100)}% OFF</span></div><button class="buy" onclick="addToCart(${c.id})">Add to Cart</button></div></article>`).join("");
+ document.getElementById("empty").style.display=list.length?"none":"block";
+ document.getElementById("resultCount").textContent=`${list.length} courses`;
+}
+function addToCart(id){if(!cart.includes(id))cart.push(id);updateCart();showModal(`<h2>🛒 Cart mein add ho gaya!</h2><p>${courses.find(c=>c.id===id).title}</p><button class="primary" onclick="showCart()">Cart dekhein</button>`)}
+function updateCart(){document.getElementById("cartCount").textContent=cart.length}
+function showCart(){
+ if(!cart.length){showModal("<h2>Aapka cart khaali hai</h2><p>Course select karke Add to Cart dabayein.</p>");return}
+ const items=cart.map(id=>courses.find(c=>c.id===id)),total=items.reduce((s,c)=>s+c.price,0);
+ showModal(`<h2>Aapka Cart (${items.length})</h2>${items.map(c=>`<p>📘 ${c.title} — <b>₹${c.price}</b> <button onclick="removeCart(${c.id})">Remove</button></p>`).join("")}<hr><h3>Total: ₹${total}</h3><div class="notice">Demo checkout: real payment gateway abhi connect nahi hai.</div><p><button class="primary" onclick="showModal('<h2>Checkout demo</h2><p>Real payments ke liye secure backend aur payment gateway setup karna hoga.</p>')">Proceed to Checkout</button></p>`);
+}
+function removeCart(id){cart=cart.filter(x=>x!==id);updateCart();showCart()}
+function showModal(html){document.getElementById("modalContent").innerHTML=html;document.getElementById("modalBackdrop").style.display="flex"}
+function closeModal(){document.getElementById("modalBackdrop").style.display="none"}
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();render()});
+input.addEventListener("input",render);
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.category;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()}));
+document.getElementById("cartBtn").addEventListener("click",showCart);
+document.getElementById("loginBtn").addEventListener("click",()=>showModal(`<h2>Student Login</h2><p>Yeh abhi demo interface hai. Real login ke liye authentication backend connect karna hoga.</p><label>Email</label><input style="width:100%;padding:12px;margin:8px 0;border:1px solid #d0d5dd;border-radius:8px" type="email" placeholder="you@example.com"><label>Password</label><input style="width:100%;padding:12px;margin:8px 0;border:1px solid #d0d5dd;border-radius:8px" type="password" placeholder="Password"><button class="primary" onclick="showModal('<h2>Demo only</h2><p>Account creation abhi connected nahi hai.</p>')">Login (Demo)</button>`));
+document.getElementById("closeModal").addEventListener("click",closeModal);
+document.getElementById("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
+render();
+</script>
+</body>
+</html>
