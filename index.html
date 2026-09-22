@@ -86,7 +86,6 @@ document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDef
 input.addEventListener("input",render);
 document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.category;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()}));
 document.getElementById("cartBtn").addEventListener("click",showCart);
-
 async function studentLogin() {
   const email = document.getElementById("studentEmail").value;
   const password = document.getElementById("studentPassword").value;
