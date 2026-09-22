@@ -86,7 +86,36 @@ document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDef
 input.addEventListener("input",render);
 document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.category;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()}));
 document.getElementById("cartBtn").addEventListener("click",showCart);
-document.getElementById("loginBtn").addEventListener("click",()=>showModal(`<h2>Student Login</h2><p>Yeh abhi demo interface hai. Real login ke liye authentication backend connect karna hoga.</p><label>Email</label><input style="width:100%;padding:12px;margin:8px 0;border:1px solid #d0d5dd;border-radius:8px" type="email" placeholder="you@example.com"><label>Password</label><input style="width:100%;padding:12px;margin:8px 0;border:1px solid #d0d5dd;border-radius:8px" type="password" placeholder="Password"><button class="primary" onclick="showModal('<h2>Demo only</h2><p>Account creation abhi connected nahi hai.</p>')">Login (Demo)</button>`));
+
+async function studentLogin() {
+  const email = document.getElementById("studentEmail").value;
+  const password = document.getElementById("studentPassword").value;
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    showModal("<h2>Login Error</h2><p>" + error.message + "</p>");
+  } else {
+    showModal("<h2>Login Successful</h2><p>Aap login ho gaye hain!</p>");
+  }
+}
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+  showModal(`
+    <h2>Student Login</h2>
+    <label>Email</label>
+    <input id="studentEmail" type="email" placeholder="you@example.com"
+      style="width:100%;padding:12px;margin:8px 0">
+    <label>Password</label>
+    <input id="studentPassword" type="password" placeholder="Password"
+      style="width:100%;padding:12px;margin:8px 0">
+    <button class="primary" onclick="studentLogin()">Login</button>
+  `);
+}); 
+  
 document.getElementById("closeModal").addEventListener("click",closeModal);
 document.getElementById("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
 render();
