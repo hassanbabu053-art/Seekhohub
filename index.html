@@ -46,8 +46,16 @@ main{max-width:1180px;margin:auto;padding:26px 20px 60px}
 </main>
 <footer><b>SeekhoHub</b> — Aapki learning journey yahin se shuru hoti hai.<br><small>Demo website • Abhi real payment ya account system connected nahi hai.</small></footer>
 <div class="modal-backdrop" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true"><button class="close" id="closeModal">✕</button><div id="modalContent"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const courses=[
+const SUPABASE_URL = "https://tkaoevugnvkegxovkeli.supabase.co/";
+const SUPABASE_KEY = "sb_publishable_AvieDJwCbfUlX2-9LWBbrw_xESI8wUd";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+  const courses=[
  {id:1,title:"Complete Data Analytics Course",category:"Data",emoji:"📊",tone:"green",tag:"Bestseller",desc:"Excel seekhein aur Data Analytics ki basics samjhein.",price:10,old:1999,lessons:42,level:"Beginner"},
  {id:2,title:"Web Development: HTML, CSS & JS",category:"Web",emoji:"💻",tone:"dark",tag:"Practical",desc:"Responsive websites banana seekhein, zero se projects tak.",price:399,old:1499,lessons:36,level:"Beginner"},
  {id:3,title:"AI Tools se Smart Work",category:"AI",emoji:"🤖",tone:"orange",tag:"Trending",desc:"AI tools ka responsible use, prompts aur productivity workflows.",price:299,old:1299,lessons:28,level:"All levels"},
